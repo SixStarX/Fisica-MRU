@@ -1,0 +1,81 @@
+Projeto: Simulação Numérica de um Sistema Massa-Mola Amortecido**
+
+---
+
+📌 1. Objetivo do Projeto**
+
+Modelar numericamente o movimento de uma massa presa a uma mola, incluindo o efeito de amortecimento (resistência do ar ou atrito), utilizando Fortran para resolver a equação diferencial envolvida.
+
+---
+
+🧮 2. Modelo Físico
+
+Sistema massa-mola amortecido (sem força externa):
+
+Onde:
+
+* x(t): posição da massa no tempo t
+* m: massa
+* c: coeficiente de amortecimento
+* k: constante da mola
+
+Reescrevendo como um sistema de EDOs de 1ª ordem:
+
+---
+
+🔧 3. Métodos Numéricos
+
+Vamos usar o **método de Euler** ou **Runge-Kutta de 4ª ordem (RK4)** para resolver numericamente.
+
+---
+
+🗂️ 4. Planejamento do Código
+
+**Módulos principais:**
+
+1. **Entrada de dados:** parâmetros físicos (massa, constante da mola, amortecimento, condições iniciais)
+2. **Função derivadas:** define $dx/dt$ e $dv/dt$
+3. **Função RK4 ou Euler**
+4. **Loop principal de simulação**
+5. **Saída de dados:** imprimir ou salvar resultados (tempo, posição, velocidade)
+
+---
+
+🖼️ 5. Fluxo do Programa
+
+```text
++---------------------+
+| Definir parâmetros  |
++---------------------+
+           ↓
++---------------------+
+| Condições iniciais  |
++---------------------+
+           ↓
++---------------------+
+| Loop de integração  |
+| (Euler ou RK4)      |
++---------------------+
+           ↓
++---------------------+
+| Salvar resultado    |
++---------------------+
+```
+
+---
+
+📄 **6. Dados de Entrada (exemplo)**
+
+* Massa m = 1 \, \text{kg}$
+* Constante da mola k = 10 \, \text{N/m}
+* Amortecimento c = 0.5 \, \text{kg/s}
+* Condição inicial x(0) = 1 \, \text{m}, v(0) = 0
+* Tempo total: 10 segundos
+* Passo dt = 0.01 \, s
+
+---
+
+✅ **7. Critérios de Sucesso**
+
+* O programa deve gerar uma lista (ou gráfico) com a evolução da posição e velocidade no tempo.
+* Deve mostrar amortecimento no sistema (oscilações decrescentes).
