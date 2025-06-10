@@ -1,16 +1,17 @@
 program mru_mruv
   implicit none
 
-  ! Variáveis de entrada
   real :: x0, v0, a, t, dt, tf
   integer :: i, n
   character(len=4) :: tipo
-
-  ! Variáveis de saída
   real :: x, v
+  integer :: unit
 
-  ! Entrada de dados
-  print *, 'Escolha o tipo de movimento: MRU ou MRUV'
+  ! Unidade de arquivo
+  unit = 10
+
+  ! Entrada interativa
+  print *, 'Digite o tipo de movimento (MRU ou MRUV):'
   read(*,*) tipo
 
   print *, 'Digite a posição inicial (x0):'
@@ -32,27 +33,28 @@ program mru_mruv
   print *, 'Digite o passo de tempo (dt):'
   read(*,*) dt
 
-  ! Inicialização
   n = int(tf/dt)
 
-  print *, 'Tempo (s)', '   Posicao (m)', '   Velocidade (m/s)'
+  ! Abrir arquivo para saída
+  open(unit=unit, file='dados.txt', status='replace')
 
-  ! Loop de simulação
+  ! Escrever cabeçalho (opcional)
+  write(unit,*) 'Tempo  Posicao  Velocidade'
+
+  ! Loop de cálculo e gravação
   do i = 0, n
      t = i * dt
-
      if (trim(tipo) == 'MRU') then
         x = x0 + v0 * t
         v = v0
-     else if (trim(tipo) == 'MRUV') then
+     else
         x = x0 + v0 * t + 0.5 * a * t**2
         v = v0 + a * t
-     else
-        print *, 'Tipo de movimento invalido!'
-        stop
      end if
-
-     print '(F6.2, 3X, F10.4, 3X, F10.4)', t, x, v
+     write(unit,'(F6.2,1X,F10.4,1X,F10.4)') t, x, v
   end do
+
+  close(unit)
+  print *, '✅ Dados gravados com sucesso em dados.txt'
 
 end program mru_mruv
