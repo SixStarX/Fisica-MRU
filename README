@@ -1,81 +1,45 @@
-Projeto: Simulação Numérica de um Sistema Massa-Mola Amortecido**
+# 🎯 Simulador Gráfico de MRUV (Movimento Retilíneo Uniformemente Variado)
+
+Este projeto permite ao usuário simular o movimento retilíneo uniformemente variado (MRUV) com uma interface gráfica amigável em Python, realizando os cálculos com um programa em Fortran. Os resultados são apresentados graficamente e salvos em arquivos.
 
 ---
 
-📌 1. Objetivo do Projeto**
+## 📦 Conteúdo do Projeto
 
-Modelar numericamente o movimento de uma massa presa a uma mola, incluindo o efeito de amortecimento (resistência do ar ou atrito), utilizando Fortran para resolver a equação diferencial envolvida.
-
----
-
-🧮 2. Modelo Físico
-
-Sistema massa-mola amortecido (sem força externa):
-
-Onde:
-
-* x(t): posição da massa no tempo t
-* m: massa
-* c: coeficiente de amortecimento
-* k: constante da mola
-
-Reescrevendo como um sistema de EDOs de 1ª ordem:
+- `interface_mruv.py` → Interface gráfica principal (Tkinter)
+- `mruv_calc.f90` → Código Fortran que realiza os cálculos físicos
+- `entrada.txt` → Arquivo gerado automaticamente pelo Python com os parâmetros da simulação
+- `dados.txt` → Arquivo gerado pelo Fortran com os dados de tempo, posição e velocidade
+- `grafico.png` → Gráfico gerado pela simulação (posição e velocidade em função do tempo)
 
 ---
 
-🔧 3. Métodos Numéricos
+## 🚀 Funcionalidades
 
-Vamos usar o **método de Euler** ou **Runge-Kutta de 4ª ordem (RK4)** para resolver numericamente.
-
----
-
-🗂️ 4. Planejamento do Código
-
-**Módulos principais:**
-
-1. **Entrada de dados:** parâmetros físicos (massa, constante da mola, amortecimento, condições iniciais)
-2. **Função derivadas:** define $dx/dt$ e $dv/dt$
-3. **Função RK4 ou Euler**
-4. **Loop principal de simulação**
-5. **Saída de dados:** imprimir ou salvar resultados (tempo, posição, velocidade)
+- Interface gráfica simples e intuitiva
+- Simulação baseada nas equações do MRUV:
+  - \( x(t) = x_0 + v_0 t + \frac{1}{2} a t^2 \)
+  - \( v(t) = v_0 + a t \)
+- Geração automática de arquivos de entrada e saída
+- Gráfico com curvas de posição e velocidade
+- Exportação do gráfico como imagem (`grafico.png`)
+- Salva os dados em texto (`dados.txt`)
 
 ---
 
-🖼️ 5. Fluxo do Programa
+## 🧰 Requisitos
 
-```text
-+---------------------+
-| Definir parâmetros  |
-+---------------------+
-           ↓
-+---------------------+
-| Condições iniciais  |
-+---------------------+
-           ↓
-+---------------------+
-| Loop de integração  |
-| (Euler ou RK4)      |
-+---------------------+
-           ↓
-+---------------------+
-| Salvar resultado    |
-+---------------------+
-```
+- Python 3.8+
+- [gfortran](https://gcc.gnu.org/fortran/) (para compilar o programa em Fortran)
+- Bibliotecas Python:
+  - `matplotlib`  
+    Instale com: `pip install matplotlib`
 
 ---
 
-📄 **6. Dados de Entrada (exemplo)**
+## ⚙️ Como usar
 
-* Massa m = 1 \, \text{kg}$
-* Constante da mola k = 10 \, \text{N/m}
-* Amortecimento c = 0.5 \, \text{kg/s}
-* Condição inicial x(0) = 1 \, \text{m}, v(0) = 0
-* Tempo total: 10 segundos
-* Passo dt = 0.01 \, s
+### 1. Compile o programa Fortran
 
----
-
-✅ **7. Critérios de Sucesso**
-
-* O programa deve gerar uma lista (ou gráfico) com a evolução da posição e velocidade no tempo.
-* Deve mostrar amortecimento no sistema (oscilações decrescentes).
+```bash
+gfortran -o mruv_calc.exe mruv_calc.f90
