@@ -3,6 +3,6 @@
 *.TEX linguist-detectable=false
 *.Tex linguist-detectable=false
 *.TeX linguist-detectable=false
-*.py linguist-language=Python
+*.py linguist-detectable=false
 *.f90 linguist-language=Fortran
 /build linguist-vendored
